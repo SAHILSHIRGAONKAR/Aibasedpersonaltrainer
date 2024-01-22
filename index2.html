@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shieldalpha - Your AI Personal Trainer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        #background {
+            background-image: url('your-background-image.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 400px;
+            position: absolute;
+            width: 100%;
+            z-index: -1;
+        }
+
+        #header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        #logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        #startTracking {
+            background-color: #27ae60;
+            color: #fff;
+            font-size: 24px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #startTracking:hover {
+            background-color: #219d54;
+        }
+
+        #exerciseOptions {
+            margin-top: 20px;
+            display: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        .exercise-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 0 10px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .exercise-icon {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="header">
+        <img id="logo" src="{{ url_for('static', filename='TestVideosAndImages/logo.jpeg') }}" alt="Your Logo" />
+        <h1>shieldalpha</h1>
+    </div>
+
+    <div id="content">
+        <p>Welcome to shieldalpha, your AI-based personal trainer. Get ready to crush your fitness goals! To begin, click on the "Start Tracking" button.</p>
+        <button id="startTracking">Start Tracking</button>
+
+        <div id="exerciseOptions" style="display: none;">
+            <button id="bicepCurls" class="exercise-button">
+                <img class="exercise-icon" src="{{ url_for('static', filename='TestVideosAndImages/Bicepcurl.jpeg') }}" alt="Bicep Curls Icon" />
+                Bicep Curls
+            </button>
+            <button id="squats" class="exercise-button">
+                <img class="exercise-icon" src="{{ url_for('static', filename='TestVideosAndImages/squats.jpeg') }}" alt="Bicep Curls Icon" />
+                Squats
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("startTracking").addEventListener("click", function() {
+            document.getElementById("exerciseOptions").style.display = "flex";
+        });
+
+        document.getElementById("bicepCurls").addEventListener("click", function() {
+            // Execute bicep curls
+            fetch('/execute_bicep_curls')
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById("squats").addEventListener("click", function() {
+            // Execute squats
+            fetch('/execute_squats')
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
